@@ -1,0 +1,4 @@
+NEWTON PHYSICS ENGINE
+    -Static Friction: 0.5
+    -Kinetic Friction: .08
+-Gravity: [0 0 -3.71] m/s^2
