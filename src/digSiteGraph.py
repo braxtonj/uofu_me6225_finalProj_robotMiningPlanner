@@ -405,8 +405,8 @@ class DigSiteGraph:
         print '\tgrid generation took {} s...\n'.format(time.time() - startTime)
 
         digPathPlanningStartTime = time.time()
-        #self.digOrderings = list(itertools.permutations(self.digNodes))
-        self.digOrderings =[self.digNodes]   # JUST ONCE
+        self.digOrderings = list(itertools.permutations(self.digNodes))
+        #self.digOrderings =[self.digNodes]   # JUST ONCE
 
         self.shortestRoverPathNodes = None
         self.shortestRoverPathEdges = None

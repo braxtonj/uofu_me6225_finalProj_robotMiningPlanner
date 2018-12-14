@@ -85,7 +85,7 @@ def policy_iteration(gridMap, actions, start, goal, timeout=None, constActChange
         startTime = time.time()
 
     printMapsForEachIteration = True
-    printMapsForEachIterationFreq = 10
+    printMapsForEachIterationFreq = 42
 
     #Create array to store the last iteration and current working iteration
     oldStart = copy.copy(gridMap.start)
@@ -119,7 +119,8 @@ def policy_iteration(gridMap, actions, start, goal, timeout=None, constActChange
 
         #Keep revising assigned values until convergence is attained
         viIter = 0
-        while True:
+        breakMe = False
+        while not breakMe:
             viIter += 1
             print '.',
 
@@ -153,9 +154,6 @@ def policy_iteration(gridMap, actions, start, goal, timeout=None, constActChange
             else:
                 breakMe = False
 
-            #Update the reference copy and reiterate, if necessary
-            val_working_ref = val_working_current.copy()
-
             if printMapsForEachIteration and (viIter==1 or viIter%printMapsForEachIterationFreq==0) or breakMe:
                 if idxs is None:
                     tmpFN = 'policygrid_'
@@ -163,7 +161,7 @@ def policy_iteration(gridMap, actions, start, goal, timeout=None, constActChange
                 else:
                     tmpFN = 'policygrid_d{}_{}_'.format(idxs[0],idxs[1])
                     tmpTitle = 'Policy Iteration\nDig_{}_leg_{}'.format(idxs[0],idxs[1])
-                tmpTitle = '{}{}'.format(tmpTitle,'  PI{} VI{}\nStart: {}   Goal: {}'.format(iterations,viIter,gridMap.start,gridMap.goal))
+                tmpTitle = '{}{}'.format(tmpTitle,'  PI{} VI{}  DEL {}\nStart: {}   Goal: {}'.format(iterations,viIter,np.average(np.abs(val_working_current-val_working_ref)),gridMap.start,gridMap.goal))
                 tmpFNARROWS = '{}pi{}_vi{}_arr.svg'.format(tmpFN,iterations,viIter)
                 tmpFNSANARR = '{}pi{}_vi{}_sanarr.svg'.format(tmpFN,iterations,viIter)
                 cmn.printPolicyMap(val_grid=val_working_current, dir_grid=dir_current, start=gridMap.start, goal=gridMap.goal,
@@ -171,8 +169,9 @@ def policy_iteration(gridMap, actions, start, goal, timeout=None, constActChange
                 cmn.printPolicyMap(val_grid=val_working_current, dir_grid=dir_current, start=gridMap.start, goal=gridMap.goal,
                                    fn=os.path.join(cmn._IMG_FLDR, tmpFNSANARR), show=False, figTitle=tmpTitle, figSizeScale=1, drawArrows=False)
 
-            if breakMe: break
 
+            #Update the reference copy and reiterate, if necessary
+            val_working_ref = val_working_current.copy()
             
         #Once the values have converged, perform the policy update
         #Loop again to determine direction changes based on updated values

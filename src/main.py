@@ -46,32 +46,34 @@ if __name__ == '__main__':
 
     os.makedirs(cmn._IMG_FLDR)
     os.makedirs(cmn._OUT_FLDR)
-    if os.path.isdir(newOutFldr) and cmn._GRAB_PICKLE:
-        try:
-            shutil.copy(os.path.join(newOutFldr,'genMap.txt'),os.path.join(cmn._OUT_FLDR,'genMap.txt'))
-        except:
-            print 'could not copy genMap from {} to {}'.format(newOutFldr,cmn._OUT_FLDR)
-    if os.path.isdir(newImgFldr) and cmn._GRAB_PICKLE:
-        try:
-            shutil.copy(os.path.join(newImgFldr,'contourMap.png'),os.path.join(cmn._IMG_FLDR,'contourMap.png'))
-        except:
-            print 'could not copy contourMap from {} to {}'.format(newOutFldr,cmn._IMG_FLDR)
+    try:
+        if os.path.isdir(newOutFldr) and cmn._GRAB_PICKLE:
+            try:
+                shutil.copy(os.path.join(newOutFldr,'genMap.txt'),os.path.join(cmn._OUT_FLDR,'genMap.txt'))
+            except:
+                print 'could not copy genMap from {} to {}'.format(newOutFldr,cmn._OUT_FLDR)
+        if os.path.isdir(newImgFldr) and cmn._GRAB_PICKLE:
+            try:
+                shutil.copy(os.path.join(newImgFldr,'contourMap.png'),os.path.join(cmn._IMG_FLDR,'contourMap.png'))
+            except:
+                print 'could not copy contourMap from {} to {}'.format(newOutFldr,cmn._IMG_FLDR)
 
-        try:
-            shutil.copy(os.path.join(newImgFldr, 'dig_site_ordering_r100_c100_d3_INIT.svg'), os.path.join(cmn._IMG_FLDR, 'dig_site_ordering_r100_c100_d3_INIT.svg'))
-        except:
-            print 'could not copy dig_site_ordering_r100_c100_d3_INIT from {} to {}'.format(newOutFldr, cmn._IMG_FLDR)
+            try:
+                shutil.copy(os.path.join(newImgFldr, 'dig_site_ordering_r100_c100_d3_INIT.svg'), os.path.join(cmn._IMG_FLDR, 'dig_site_ordering_r100_c100_d3_INIT.svg'))
+            except:
+                print 'could not copy dig_site_ordering_r100_c100_d3_INIT from {} to {}'.format(newOutFldr, cmn._IMG_FLDR)
 
-        try:
-            shutil.copy(os.path.join(newImgFldr, 'discreteObsMap_digPlanner_post.svg'), os.path.join(cmn._IMG_FLDR, 'discreteObsMap_digPlanner_post.svg'))
-        except:
-            print 'could not copy discreteObsMap_digPlanner_post from {} to {}'.format(newOutFldr, cmn._IMG_FLDR)
+            try:
+                shutil.copy(os.path.join(newImgFldr, 'discreteObsMap_digPlanner_post.svg'), os.path.join(cmn._IMG_FLDR, 'discreteObsMap_digPlanner_post.svg'))
+            except:
+                print 'could not copy discreteObsMap_digPlanner_post from {} to {}'.format(newOutFldr, cmn._IMG_FLDR)
 
-        try:
-            shutil.copy(os.path.join(newImgFldr,'discreteObsMap_digPlanner_pre.svg'),os.path.join(cmn._IMG_FLDR,'discreteObsMap_digPlanner_pre.svg'))
-        except:
-            print 'could not copy discreteObsMap_digPlanner_pre from {} to {}'.format(newOutFldr,cmn._IMG_FLDR)
-
+            try:
+                shutil.copy(os.path.join(newImgFldr,'discreteObsMap_digPlanner_pre.svg'),os.path.join(cmn._IMG_FLDR,'discreteObsMap_digPlanner_pre.svg'))
+            except:
+                print 'could not copy discreteObsMap_digPlanner_pre from {} to {}'.format(newOutFldr,cmn._IMG_FLDR)
+    except:
+        pass
      #Setup and start VREP interface
     
     s = sim.Sim()
